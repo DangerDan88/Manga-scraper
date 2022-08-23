@@ -1,23 +1,21 @@
-//import * as cheerio from "cheerio";
-import http from "http";
-const PORT = 3000;
+import * as cheerio from "cheerio";
+import express from "express";
 import axios from "axios";
+const PORT = 3000;
 
-let url = "https://www.reddit.com/r/programming.json";
+const app = express();
+app.listen(PORT, () => console.log(`server running on port ${PORT}`));
+app.get("/", function (req, res) {
+  res.send("Hello world!");
+});
 
+let url = "https://www.barnesandnoble.com/b/viz-media/_/N-1p70";
+// might need to install express here not entirley sure yet
 axios(url)
   .then((response) => {
-    console.log(response);
+    const $ = cheerio.load(response.data);
+    console.log($);
   })
   .catch((error) => {
     console.error(error);
   });
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "text/plain");
-  res.end("Hello World");
-});
-
-server.listen(PORT, () => {
-  console.log(`Server running at PORT:${PORT}/`);
-});
