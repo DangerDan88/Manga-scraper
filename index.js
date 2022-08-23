@@ -15,7 +15,14 @@ axios(url)
   .then((response) => {
     const $ = cheerio.load(response.data);
     console.log($);
+    $("div").each(function (i, element) {
+      const result = {};
+      result.title = $(this).children("a").text();
+      result.link = $(this).children("a").attr("href");
+      console.log(result);
+    });
   })
   .catch((error) => {
     console.error(error);
   });
+// got some actual data to scrape need to clean up what scrapes then get it on page
