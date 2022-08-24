@@ -7,6 +7,9 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.engine("handlebars", engine());
+app.set("view engine", "handlebars");
+app.set("views", "./views");
 
 app.listen(PORT, () => console.log(`server running on port ${PORT}`));
 app.get("/", function (req, res) {
