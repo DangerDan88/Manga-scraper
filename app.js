@@ -12,13 +12,19 @@ app.listen(PORT, () => console.log(`server running on port ${PORT}`));
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 app.set("views", "./views");
-
+let books = [
+  {
+    book: "chainsawman",
+  },
+  {
+    book: "classroom of the elite",
+  },
+];
 app.get("/", (req, res) => {
-  //Serves the body of the page aka "main.handlebars" to the container //aka "index.handlebars"
-  res.render("home");
+  //Serves the body of the page aka "home.handlebars to the container //aka ""main.handlebars"
+  // seems we need to send the data over in an object then loop those to get these to render got normal array object to render items
+  res.render("home", books[0]);
 });
-/////////
-// getting an error failed to lookup main in views? Need to fix folder structure
 
 // url we are scraping is here
 let url = "https://www.barnesandnoble.com/b/viz-media/_/N-1p70";
@@ -29,11 +35,13 @@ axios(url)
     const $ = cheerio.load(response.data);
     //console.log($);
     $(".product-shelf-title").each(function (i, element) {
-      const result = {};
+      const result = [];
       // This pulls in the title and link for the books we are scraping
       result.title = $(this).children("a").text();
       result.link = $(this).children("a").attr("href");
-      console.log(result);
+      // books.push(result);
+      //console.log(books);
+      // console.log(result);
     });
   })
   .catch((error) => {
