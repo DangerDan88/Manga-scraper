@@ -4,6 +4,7 @@ import axios from "axios";
 const PORT = 3000;
 const app = express();
 import { engine } from "express-handlebars";
+import mongoose from "mongoose";
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -23,7 +24,7 @@ let books = [
 app.get("/", (req, res) => {
   //Serves the body of the page aka "home.handlebars to the container //aka ""main.handlebars"
   // seems we need to send the data over in an object then loop those to get these to render got normal array object to render items
-  res.render("home", books[0]);
+  res.render("home", books[1]);
 });
 
 // url we are scraping is here
