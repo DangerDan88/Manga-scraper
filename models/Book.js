@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+const mongoose = require("mongoose");
 
 // Save a reference to the Schema constructor
 const Schema = mongoose.Schema;
@@ -20,7 +20,7 @@ const BookSchema = new Schema({
 
 // This creates our model from the above schema, using mongoose's model method
 //const Book = mongoose.model("Book", BookSchema);
-const BookModel = mongoose.model("Book", BookSchema);
+const Book = mongoose.model("Book", BookSchema);
 // Export the Book model
-export default BookModel;
 // why does module,exports break this import in another file?
+module.exports = Book;

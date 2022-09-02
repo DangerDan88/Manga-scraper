@@ -1,11 +1,10 @@
-import * as cheerio from "cheerio";
-import express from "express";
+const cheerio = require("cheerio");
+const express = require("express");
 const app = express();
-import axios from "axios";
-import db from "../models/Book.js";
-// this import seems to be giving me trouble the orginal way we exported from the models folder this import worked to get db in but insertmany breaks
-// need to import db and book from file with es6 seems to have trouble would be easier with commin js
-// need to find a youtube on how to do this
+const axios = require("axios");
+const db = require("../models/index");
+
+// re did it to not use Es6 imports was giving me huge trouble with the mongoose imports now I have insert is not a function error seems to have same error here
 app.get("/", (req, res) => {
   //Serves the body of the page aka "home.handlebars to the container //aka ""main.handlebars"
   // seems we need to send the data over in an object then loop those to get these to render got normal array object to render items
@@ -25,7 +24,7 @@ app.get("/scrape", (req, res) => {
       result.title = $(this).children("a").text();
       result.link = $(this).children("a").attr("href");
 
-      db.Book.insert(result)
+      db.Book.insertMany(result)
         .then(function (dbBook) {
           // View the added result in the console
           console.log(dbBook);
@@ -39,4 +38,5 @@ app.get("/scrape", (req, res) => {
   });
 });
 /// Look at google book api to see how we pulled those books and images from the DB
-export default app;
+/// need to look at mongo manga db in command line to see if we added anything
+module.exports = app;
