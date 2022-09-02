@@ -2,10 +2,10 @@ import * as cheerio from "cheerio";
 import express from "express";
 const app = express();
 import axios from "axios";
-import db from "../models/Books.js";
+import db from "../models/Book.js";
 // this import seems to be giving me trouble the orginal way we exported from the models folder this import worked to get db in but insertmany breaks
-console.log(db);
-
+// need to import db and book from file with es6 seems to have trouble would be easier with commin js
+// need to find a youtube on how to do this
 app.get("/", (req, res) => {
   //Serves the body of the page aka "home.handlebars to the container //aka ""main.handlebars"
   // seems we need to send the data over in an object then loop those to get these to render got normal array object to render items
@@ -24,10 +24,8 @@ app.get("/scrape", (req, res) => {
       // This pulls in the title and link for the books we are scraping
       result.title = $(this).children("a").text();
       result.link = $(this).children("a").attr("href");
-      // books.push(result);
-      //console.log(books);
-      // console.log(result);
-      db.Books.insertMany(result)
+
+      db.Book.insert(result)
         .then(function (dbBook) {
           // View the added result in the console
           console.log(dbBook);
