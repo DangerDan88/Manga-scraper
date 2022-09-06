@@ -23,7 +23,7 @@ app.get("/scrape", (req, res) => {
       // This pulls in the title and link for the books we are scraping
       result.title = $(this).children("a").text();
       result.link = $(this).children("a").attr("href");
-
+      // breaks at this function
       db.Book.insertMany(result)
         .then(function (dbBook) {
           // View the added result in the console
