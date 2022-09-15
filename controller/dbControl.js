@@ -17,9 +17,9 @@ app.get("/scrape", (req, res) => {
 
   axios(url).then((response) => {
     const $ = cheerio.load(response.data);
-    //console.log($);
+    // console.log($);
     $(".product-shelf-title").each(function (i, element) {
-      const result = [];
+      const result = {};
       // This pulls in the title and link for the books we are scraping
       result.title = $(this).children("a").text();
       result.link = $(this).children("a").attr("href");
@@ -27,7 +27,7 @@ app.get("/scrape", (req, res) => {
       db.Book.insertMany(result)
         .then(function (dbBook) {
           // View the added result in the console
-          console.log(dbBook);
+          //  console.log(dbBook);
         })
         .catch(function (err) {
           // If an error occurred, log it
@@ -36,6 +36,19 @@ app.get("/scrape", (req, res) => {
     });
     res.redirect("/");
   });
+});
+
+app.get("/books", function (req, res) {
+  // Grab every document in the Articles collection
+  db.Book.find({})
+    .then(function (result) {
+      // If we were able to successfully find Articles, send them back to the client
+      // console.log(result);
+      res.json(result);
+    })
+    .catch(function (err) {
+      res.json(err);
+    });
 });
 /// Look at google book api to see how we pulled those books and images from the DB
 /// need to look at mongo manga db in command line to see if we added anything
