@@ -27,7 +27,7 @@ app.get("/scrape", (req, res) => {
       db.Book.insertMany(result)
         .then(function (dbBook) {
           // View the added result in the console
-          //  console.log(dbBook);
+          console.log(dbBook);
         })
         .catch(function (err) {
           // If an error occurred, log it
@@ -35,6 +35,7 @@ app.get("/scrape", (req, res) => {
         });
     });
     res.redirect("/");
+    console.log("made it here?");
   });
 });
 
@@ -43,7 +44,7 @@ app.get("/books", function (req, res) {
   db.Book.find({})
     .then(function (result) {
       // If we were able to successfully find Articles, send them back to the client
-      // console.log(result);
+      console.log(result);
       res.json(result);
     })
     .catch(function (err) {
