@@ -1,21 +1,24 @@
 const mongoose = require("mongoose");
 const express = require("express");
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 const app = express();
 const { engine } = require("express-handlebars");
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/manga";
+const MONGODBURL = "mongodb://localhost/manga";
 
-async function connectDB() {
-  let connect = await mongoose.connect("mongodb://localhost:27017/manga", {
-    useNewUrlParser: true,
-  });
-  await new Promise((resolve, reject) => setTimeout(resolve, 10000));
-  return connect;
-}
-connectDB();
 // figure out the buffering it seems to want model before connection not sure if DB is even connected
 // why is db not connecting??
+
+mongoose.connect("mongodb://127.0.0.1/manga", {
+  useNewUrlParser: true,
+});
+
+mongoose.connection.on("error", (err) => {
+  console.log("err", err);
+});
+mongoose.connection.on("connected", (err, res) => {
+  console.log("mongoose is connected");
+});
 
 require("./models");
 const routes = require("./controller/dbControl.js");

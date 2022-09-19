@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 // Using the Schema constructor, create a new UserSchema object
 // This is similar to a Sequelize model
-const BookSchema = new Schema({
+const MangaSchema = new Schema({
   // `title` is required and of type String
   title: {
     type: String,
@@ -19,8 +19,8 @@ const BookSchema = new Schema({
 });
 
 // This creates our model from the above schema, using mongoose's model method
-//const Book = mongoose.model("Book", BookSchema);
-const Book = mongoose.model("Book", BookSchema);
-// Export the Book model
+//const Manga = mongoose.model("Manga", MangaSchema);
+const Manga = mongoose.model("Manga", MangaSchema);
+// Export the Manga model
 // why does module,exports break this import in another file?
-module.exports = Book;
+module.exports = Manga;

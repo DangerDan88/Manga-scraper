@@ -24,7 +24,7 @@ app.get("/scrape", (req, res) => {
       result.title = $(this).children("a").text();
       result.link = $(this).children("a").attr("href");
       // breaks at this function
-      db.Book.insertMany(result)
+      db.Manga.insertMany(result)
         .then(function (dbBook) {
           // View the added result in the console
           console.log(dbBook);
@@ -41,7 +41,7 @@ app.get("/scrape", (req, res) => {
 
 app.get("/books", function (req, res) {
   // Grab every document in the Articles collection
-  db.Book.find({})
+  db.Manga.find({})
     .then(function (result) {
       // If we were able to successfully find Articles, send them back to the client
       console.log(result);
@@ -51,6 +51,5 @@ app.get("/books", function (req, res) {
       res.json(err);
     });
 });
-/// Look at google book api to see how we pulled those books and images from the DB
-/// need to look at mongo manga db in command line to see if we added anything
+
 module.exports = app;
