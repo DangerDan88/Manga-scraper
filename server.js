@@ -4,11 +4,6 @@ const PORT = 3000;
 const app = express();
 const { engine } = require("express-handlebars");
 
-const MONGODBURL = "mongodb://localhost/manga";
-
-// figure out the buffering it seems to want model before connection not sure if DB is even connected
-// why is db not connecting??
-
 mongoose.connect("mongodb://127.0.0.1/manga", {
   useNewUrlParser: true,
 });

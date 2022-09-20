@@ -35,7 +35,6 @@ app.get("/scrape", (req, res) => {
         });
     });
     res.redirect("/");
-    console.log("made it here?");
   });
 });
 
@@ -43,9 +42,10 @@ app.get("/books", function (req, res) {
   // Grab every document in the Articles collection
   db.Manga.find({})
     .then(function (result) {
-      // If we were able to successfully find Articles, send them back to the client
-      console.log(result);
-      res.json(result);
+      // If we were able to successfully find books, send them back to the client
+      // console.log(result);
+      // res.json(result);
+      result.forEach((result) => console.log(result));
     })
     .catch(function (err) {
       res.json(err);
@@ -53,3 +53,4 @@ app.get("/books", function (req, res) {
 });
 
 module.exports = app;
+/// Need to clean this up and what we want to scrape and make it display on page nice
