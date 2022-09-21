@@ -13,7 +13,8 @@ app.get("/", (req, res) => {
 
 // url we are scraping is here
 app.get("/scrape", (req, res) => {
-  let url = "https://www.barnesandnoble.com/b/viz-media/_/N-1p70";
+  let url =
+    "https://www.barnesandnoble.com/b/viz-media/_/N-1p70?Ns=P_Publication_Date%7C1";
 
   axios(url).then((response) => {
     const $ = cheerio.load(response.data);
@@ -45,10 +46,16 @@ app.get("/books", function (req, res) {
       // If we were able to successfully find books, send them back to the client
       // console.log(result);
       // res.json(result);
-      result.forEach((result) => console.log(result));
+
+      result.forEach((result) => {
+        let displayBook = result.title;
+        let displayLink = result.link;
+        console.log(result.title);
+        res.json(displayBook);
+      });
     })
     .catch(function (err) {
-      res.json(err);
+      // res.json(err);
     });
 });
 
