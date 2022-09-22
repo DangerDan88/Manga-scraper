@@ -44,15 +44,10 @@ app.get("/books", function (req, res) {
   db.Manga.find({})
     .then(function (result) {
       // If we were able to successfully find books, send them back to the client
-      // console.log(result);
-      // res.json(result);
-
-      result.forEach((result) => {
-        let displayBook = result.title;
-        let displayLink = result.link;
-        console.log(result.title);
-        res.json(displayBook);
-      });
+      console.log(result);
+      result.forEach((books) => console.log(books.title));
+      // this loops thru array and displays each object now need to display to page after the loop
+      // this works to send one book need to it to look nicer when displaying
     })
     .catch(function (err) {
       // res.json(err);
