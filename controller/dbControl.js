@@ -24,11 +24,15 @@ app.get("/scrape", (req, res) => {
       // This pulls in the title and link for the books we are scraping
       result.title = $(this).children("a").text();
       result.link = $(this).children("a").attr("href");
-      // breaks at this function
+
       db.Manga.insertMany(result)
         .then(function (dbBook) {
           // View the added result in the console
-          console.log(dbBook);
+          // console.log(dbBook);
+          // this does seem to loop the objects right now need to see if we can display to page
+          for (let i = 0; i < dbBook.length; i++) {
+            console.log(dbBook[i]);
+          }
         })
         .catch(function (err) {
           // If an error occurred, log it
@@ -40,12 +44,16 @@ app.get("/scrape", (req, res) => {
 });
 
 app.get("/books", function (req, res) {
-  // Grab every document in the Articles collection
+  // Grab every document in the Books collection
   db.Manga.find({})
     .then(function (result) {
       // If we were able to successfully find books, send them back to the client
-      console.log(result);
-      result.forEach((books) => console.log(books.title));
+      // console.log(result);
+      // result.forEach((books) => console.log(books.title));
+      result.forEach(function (books) {
+        console.log(books.title);
+      });
+      res.render("home", { books: result.title });
       // this loops thru array and displays each object now need to display to page after the loop
       // this works to send one book need to it to look nicer when displaying
     })
@@ -55,4 +63,3 @@ app.get("/books", function (req, res) {
 });
 
 module.exports = app;
-/// Need to clean this up and what we want to scrape and make it display on page nice
