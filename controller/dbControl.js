@@ -20,10 +20,14 @@ app.get("/scrape", (req, res) => {
     const $ = cheerio.load(response.data);
     // console.log($);
     $(".product-shelf-title").each(function (i, element) {
-      const result = {};
+      const result = [];
       // This pulls in the title and link for the books we are scraping
-      result.title = $(this).children("a").text();
-      result.link = $(this).children("a").attr("href");
+      title = $(this).children("a").text();
+      link = $(this).children("a").attr("href");
+      result.push({
+        title,
+        link,
+      });
 
       db.Manga.insertMany(result)
         .then(function (dbBook) {
@@ -49,11 +53,10 @@ app.get("/books", function (req, res) {
     .then(function (result) {
       // If we were able to successfully find books, send them back to the client
       // console.log(result);
-      // result.forEach((books) => console.log(books.title));
       result.forEach(function (books) {
         console.log(books.title);
       });
-      res.render("home", { books: result.title });
+      res.json(result);
       // this loops thru array and displays each object now need to display to page after the loop
       // this works to send one book need to it to look nicer when displaying
     })
