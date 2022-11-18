@@ -57,12 +57,13 @@ app.get("/books", function (req, res) {
         console.log(books.title);
       });
       res.json(result);
-      // this loops thru array and displays each object now need to display to page after the loop
+      // HOW DO WE LOOP THIS DATA AND DISPLAY TO PAGE?
       // this works to send one book need to it to look nicer when displaying
     })
     .catch(function (err) {
-      // res.json(err);
+      //res.json(err);
     });
 });
 
 module.exports = app;
+// getting back to it
