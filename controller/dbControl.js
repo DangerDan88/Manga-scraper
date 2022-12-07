@@ -51,9 +51,10 @@ app.get("/books", function (req, res) {
   // Grab every document in the Books collection
   db.Manga.find({})
     .then(function (result) {
-      // If we were able to successfully find books, send them back to the client
-      // console.log(result);
       result.forEach(function (books) {
+        Object.entries(result).forEach(([key, value]) => {
+          console.log(`${key}:  ${value}`);
+        });
         console.log(books.title);
       });
       res.json(result);
@@ -66,4 +67,3 @@ app.get("/books", function (req, res) {
 });
 
 module.exports = app;
-// getting back to it
