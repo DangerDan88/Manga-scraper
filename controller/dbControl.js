@@ -53,12 +53,13 @@ app.get("/books", function (req, res) {
     .then(function (result) {
       result.forEach(function (books) {
         Object.entries(result).forEach(([key, value]) => {
-          console.log(`${key}:  ${value}`);
+          //  console.log(`${key}:  ${value}`);
         });
         console.log(books.title);
       });
-      res.json(result);
-      // HOW DO WE LOOP THIS DATA AND DISPLAY TO PAGE?
+      res.render("home", { books: result });
+      // this renders the data to the page but just the blob of info need to see how to style it when pulling
+      /// need to create a way to clear database as well once we get the info on the page how we want so we do not overload the page
       // this works to send one book need to it to look nicer when displaying
     })
     .catch(function (err) {
