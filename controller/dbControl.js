@@ -3,6 +3,9 @@ const express = require("express");
 const app = express();
 const axios = require("axios");
 const db = require("../models/index");
+const path = require("path");
+
+app.use(express.static("public"));
 
 // re did it to not use Es6 imports was giving me huge trouble with the mongoose imports now I have insert is not a function error seems to have same error here
 app.get("/", (req, res) => {
