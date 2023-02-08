@@ -3,6 +3,7 @@ const express = require("express");
 const PORT = 3000;
 const app = express();
 const { engine } = require("express-handlebars");
+const path = require("path");
 
 mongoose.connect("mongodb://127.0.0.1/manga", {
   useNewUrlParser: true,
@@ -22,6 +23,7 @@ app.use(routes);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.engine("handlebars", engine({ defaultLayout: "main" }));
+app.use(express.static(path.join(__dirname, "/public")));
 app.set("view engine", "handlebars");
 app.set("views", "./views");
 
