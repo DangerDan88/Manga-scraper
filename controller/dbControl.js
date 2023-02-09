@@ -38,7 +38,7 @@ app.get("/scrape", (req, res) => {
           // console.log(dbBook);
           // this does seem to loop the objects right now need to see if we can display to page
           for (let i = 0; i < dbBook.length; i++) {
-            console.log(dbBook[i]);
+            //   console.log(dbBook[i]);
           }
         })
         .catch(function (err) {
@@ -56,11 +56,19 @@ app.get("/books", function (req, res) {
     .then(function (result) {
       result.forEach(function (books) {
         Object.entries(result).forEach(([key, value]) => {
-          //  console.log(`${key}:  ${value}`);
+          // console.log(`${key}:  ${value}`);
+          while (true) {
+            for (let i = 0; i < result.length; i++) {
+              console.log(result[1]);
+              // this does pull out on result so I can try and destructure it but many tests have left duplicates in my DB need to get those out
+              // or write a function that deletes any duplicates.
+            }
+          }
         });
-        console.log(books.title);
+        // console.log(result._id);
       });
       res.render("home", { books: result });
+      // how do we format the json so we can render the book titles easier?
       // this renders the data to the page but just the blob of info need to see how to style it when pulling
       /// need to create a way to clear database as well once we get the info on the page how we want so we do not overload the page
       // this works to send one book need to it to look nicer when displaying
