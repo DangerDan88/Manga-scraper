@@ -31,6 +31,7 @@ app.get("/scrape", (req, res) => {
         title,
         link,
       });
+      /// need to check for dupes here when inserting into DB
 
       db.Manga.insertMany(result)
         .then(function (dbBook) {
@@ -59,7 +60,7 @@ app.get("/books", function (req, res) {
           // console.log(`${key}:  ${value}`);
           while (true) {
             for (let i = 0; i < result.length; i++) {
-              console.log(result[1]);
+              console.log(result[3]);
               // this does pull out on result so I can try and destructure it but many tests have left duplicates in my DB need to get those out
               // or write a function that deletes any duplicates.
             }
